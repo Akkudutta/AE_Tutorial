@@ -1,5 +1,3 @@
-from json import load
-from turtle import width
 import streamlit as st
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
@@ -807,7 +805,7 @@ Studio mixers come in different sizes and configurations, offering various input
              """)
     l_img = load_image("Images/mixer.jpg")
     st.image(l_img)   
-    l3, c3, r3 = st.columns((1.3,1,1))
+    l3, c3, r3 = st.columns((2.5,1,2))
     with c3:
         st.write("**MIXER**")
     st.write("##")
