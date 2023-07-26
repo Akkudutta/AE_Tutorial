@@ -20,10 +20,9 @@ users = fetch_users()
 emails = [user['key'] for user in users]
 usernames = [user['username'] for user in users]
 passwords = [user['password'] for user in users]
-
 ld, cd, rd = st.columns(3)
 with cd:
-    authenticator = stauth.Authenticate(emails, usernames, passwords, "students", "qwerty", cookie_expiry_days=1)
+    authenticator = stauth.Authenticate(emails, usernames, passwords, cookie_name="students", key="qwerty", cookie_expiry_days=1,)
     email, authentication_status, username = authenticator.login("THE SOFT DRINK STUDIOS 🎵", "main")
 
 
@@ -33,6 +32,8 @@ if username:
 
         if authentication_status: 
 
+            st.balloons()
+            
             @st.cache_data   #Lottie Cache Setup
             def load_lottieurl(url):
                 r = requests.get(url)
@@ -40,13 +41,6 @@ if username:
                     return  None
                 return r.json()
             
-            @st.cache_data
-            def read_pdf(file_path):
-                with open(file_path, "rb") as file:
-                    pdf_contents = file.read()
-                return pdf_contents
-
-
             @st.cache_data   #Image Cache Setup
             def load_image(filename):
                 l_img = Image.open(filename)
@@ -86,13 +80,6 @@ if username:
                 lvl = 20*math.log10(apt/apt0)
                 return lvl
 
-            c1, c2, c3, c4, c5, c6, c7 = st.columns(7)
-            with c6:
-                st.write('***The Soft Drink Studios***')
-            with c7:
-                l_img = load_image("Images/logo.png")
-                st.image(l_img, width=65)
-
             lj,rj = st.columns((0.1,1))
             with rj:
                 st.title('BASICS OF AUDIO ENGINEERING')
@@ -102,21 +89,25 @@ if username:
 
 
             with st.sidebar:
-                
+                c1,c2 = st.columns((0.5,2))
+                with c1:
+                    l_img = load_image("Images/logo.png")
+                    st.image(l_img, width=65)
+                with c2:
+                    st.title("The Soft Drink Studios")
                 h1,h2= st.columns((2,1))
                 with h2:
                     authenticator.logout("👤Logout")
                 with h1:
-                    pdf_file_path = "AE.pdf"
-                    pdf_contents = read_pdf(pdf_file_path)
-                    st.download_button(label='📁 Download as PDF file', data= pdf_contents, file_name='Basics_of_Audio_Engineering.pdf')
+                    st.title("🎉 WELCOME 🎊")
+                
                 selected =  option_menu(
-                menu_title = f"{username}",
-                options = ["Module-1","Module-2", "Module-3", "Module-4", "Module-5"],
-                menu_icon = "cassette-fill"
-                )
+                    menu_title = f"{username} 🎧🎶🎤",
+                    options = ["Introduction","Properties of Sound", "Acoustic Properties", "Equipments & Gears", "DAW"],
+                    menu_icon = "cassette-fill"
+                    )
 
-            if selected == "Module-1":
+            if selected == "Introduction":
                 st.write("---")
                 lcl, mcl, rcl = st.columns(3)
                 with mcl:
@@ -238,7 +229,7 @@ if username:
                 """)
                 st.write("---")
 
-            if selected == 'Module-2':
+            if selected == 'Properties of Sound':
                 st.write("---")
                 lcl, rcl = st.columns((1,3))
                 with rcl:
@@ -476,7 +467,7 @@ if username:
                 st.image(l_img)
                 st.write("---")
 
-            if selected == 'Module-3':
+            if selected == 'Acoustic Properties':
                 st.write("---")
                 lcc,rcc = st.columns((0.5,2))
                 with rcc:
@@ -627,7 +618,7 @@ if username:
                 st.write("##")
                 st.write("---")
 
-            if selected == 'Module-4':
+            if selected == 'Equipments & Gears':
                 st.write("---")
                 lcc,rcc = st.columns((0.5,2))
                 with rcc:
@@ -844,7 +835,7 @@ if username:
                     st.write("**RECORDING STUDIO**")
                 st.write("---")
                 
-            if selected == 'Module-5':
+            if selected == 'DAW':
                 st.write("---")
                 ll,rr = st.columns((0.5,4))
                 with rr:
@@ -895,7 +886,9 @@ if username:
                 st.write("---")
     else:
         if authentication_status == False:
-            st.error("Username/Password is incorrect")
+            lm,cm, rm = st.columns(3)
+            with cm:
+                st.error("Incorrect Username/Password!!")
 else:
     if not authentication_status:
         lm,cm, rm = st.columns(3)
