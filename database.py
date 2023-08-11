@@ -5,7 +5,17 @@ import re
 import streamlit_authenticator as stauth
 import os
 from dotenv import load_dotenv
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
+smtp_server = "smtp.gmail.com"
+smtp_port = 587
+smtp_username = "thesoftdrinkstudios@gmail.com"
+smtp_password = "josnrvxhlzsbodrz"
+
+sender_email = "akku.dutta@gmail.com"
+subject = "Confirmation Email for Successful Signup"
 
 #Load Environment Variable
 load_dotenv('.env')
@@ -55,7 +65,7 @@ def get_usernames():
     users = db.fetch()
     usernames = []
     for user in users.items:
-        usernames.append(user['key'])
+        usernames.append(user['username'])
     return usernames
 
 def validate_email(email):
@@ -104,6 +114,20 @@ def sign_up():
                                             # Add user to DB
                                             hashed_password = stauth.Hasher([password2]).generate()
                                             insert_user(email, name,username,hashed_password[0])
+
+                                            message = MIMEMultipart()
+                                            message["From"] = sender_email
+                                            message["To"] = email
+                                            message["Subject"] = subject
+
+                                            body = f"Thank you for signing up {name}!\n\nYour username: {username}\nYour password: {password2}\n\nPlease use these credentials to login to our Portal. Please follow the below link to login:\n\nhttps://ae-tutorial.onrender.com/"
+                                            message.attach(MIMEText(body, "plain"))
+
+                                            server = smtplib.SMTP(smtp_server, smtp_port)
+                                            server.starttls()
+                                            server.login(smtp_username, smtp_password)
+                                            server.sendmail(sender_email, email, message.as_string())
+                                            server.quit()
                                             st.success(f"Congratulations **{name}**!! You have successfully signed up.")
                                             st.balloons()
                                         else:
@@ -124,7 +148,6 @@ def sign_up():
                 st.warning("Please Enter Your Email")
         else:
             st.warning("Please Enter Your Name")
-
         l1,l2,l3,l4,l5 = st.columns(5)
         with l5:
             st.form_submit_button("Sign Up")
