@@ -847,39 +847,46 @@ if username:
             Some popular examples of DAWs include:
 
             1. **Ableton Live:** Known for its real-time performance capabilities and versatility, it is widely used for electronic music production, DJing, and live performances.
-            """)
+            [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=vCNASTnM6p4)""")
                 l_img = load_image("Images/Ableton.jpg")
                 st.image(l_img)
-                st.write("""
+                st.write("##")
+                st.markdown("""
             2. **Logic Pro X:** An Apple-exclusive DAW, favored by many musicians and producers for its intuitive interface and powerful editing tools.
-            """)
+            [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=xKWdaSf9y5U)""")
                 l_img = load_image("Images/Logic.jpg")
                 st.image(l_img)
-                st.write("""
+                st.write("##")
+                st.markdown("""
             3. **Pro Tools:** A widely used industry-standard DAW for professional audio recording, mixing, and editing, often used in recording studios and post-production facilities.
-            """)
+            [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=2PPihcAHhgU)""")
                 l_img = load_image("Images/Protools.jpg")
                 st.image(l_img)
+                st.write("##")
                 st.write("""
             4. **FL Studio (Fruity Loops):** Popular among electronic music producers and beatmakers, it offers a user-friendly interface and a wide range of virtual instruments and effects.
-            """)
+            [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=6ZuBg6bmkhk)""")
                 l_img = load_image("Images/fl.jpg")
                 st.image(l_img)
+                st.write("##")
                 st.write("""
             5. **Cubase:** A feature-rich DAW with advanced MIDI capabilities, commonly used in music production and sound design.
-            """)
+            [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=XLqT286Gbng)""")
                 l_img = load_image("Images/cubase.jpg")
                 st.image(l_img)
+                st.write("##")
                 st.write(""" 
             6. **Reaper:** A lightweight and affordable DAW known for its customizability and support for a wide range of audio plugins.
-            """)
+            [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=_shjd4GBILo&t=51s)""")
                 l_img = load_image("Images/reaper.jpg")
                 st.image(l_img)
+                st.write("##")
                 st.write(""" 
             7. **Studio One:** Valued for its straightforward workflow and seamless integration with PreSonus hardware.
-            """)
+            [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=iIg5ngjPp-g&t=76s)""")
                 l_img = load_image("Images/studioone.jpg")
                 st.image(l_img)
+                st.write("##")    
                 st.write(""" 
             These are just a few examples, and there are many other DAWs available, each with its own unique features and strengths. Users often choose a DAW based on their specific needs, preferred workflow, and the type of music or audio projects they wish to create.
                         """)
