@@ -886,7 +886,7 @@ if username:
             [Check out this YouTube video to learn more.](https://www.youtube.com/watch?v=iIg5ngjPp-g&t=76s)""")
                 l_img = load_image("Images/studioone.jpg")
                 st.image(l_img)
-                st.write("##")
+                st.write("##")  
                 st.write(""" 
             These are just a few examples, and there are many other DAWs available, each with its own unique features and strengths. Users often choose a DAW based on their specific needs, preferred workflow, and the type of music or audio projects they wish to create.
                         """)
