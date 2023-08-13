@@ -1,3 +1,4 @@
+from turtle import width
 import streamlit as st
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
@@ -13,7 +14,15 @@ import math
 import streamlit_authenticator as stauth
 from database import fetch_users
 
-st.set_page_config(page_title="THE SOFT DRINK", page_icon=':computer:', layout= 'wide')
+st.set_page_config(page_title="The Soft Drink Studios", page_icon='🎙', layout= 'wide')
+
+#----USE LOCAL CSS-------
+#Style.css file download: https://github.com/Sven-Bo/personal-website-streamlit/blob/master/style/style.css
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+local_css("Style/Style.css")
 
 #---USER AUTHENTICATION---
 users = fetch_users()
@@ -30,9 +39,10 @@ if username:
 
     if username in usernames:
 
-        if authentication_status: 
+        if authentication_status:
 
-            st.balloons()
+            user_index = usernames.index(username)
+            name = users[user_index]['name']
             
             @st.cache_data   #Lottie Cache Setup
             def load_lottieurl(url):
@@ -79,34 +89,33 @@ if username:
                 apt0 = 20 # Reference amplitude in micropascals
                 lvl = 20*math.log10(apt/apt0)
                 return lvl
-
-            lj,rj = st.columns((0.1,1))
-            with rj:
-                st.title('BASICS OF AUDIO ENGINEERING')
-            lcl, rcl = st.columns((2,1))
-            with rcl:
-                st.write('***A course by Aakarshan Dutta***')
-
-
-            with st.sidebar:
+            def logo():
                 c1,c2 = st.columns((0.5,2))
                 with c1:
                     l_img = load_image("Images/logo.png")
                     st.image(l_img, width=65)
                 with c2:
                     st.title("The Soft Drink Studios")
-                h1,h2= st.columns((2,1))
-                with h2:
-                    authenticator.logout("👤Logout")
-                with h1:
-                    st.title("🎉 WELCOME 🎊")
-                
-                selected =  option_menu(
-                    menu_title = f"{username} 🎧🎶🎤",
-                    options = ["Introduction","Properties of Sound", "Acoustic Properties", "Equipments & Gears", "DAW"],
-                    menu_icon = "cassette-fill"
-                    )
+            
+            lj,rj = st.columns((0.1,1))
+            with rj:
+                st.title('🎙 BASICS OF AUDIO ENGINEERING 🎙')
+            lcl, rcl = st.columns((2,1))
+            with rcl:
+                st.markdown('<u>***A course by Aakarshan Dutta***</u>', unsafe_allow_html=True)
 
+            with st.sidebar:
+                h1,h2,h3 = st.columns((1,2,1))
+                with h2:
+                    authenticator.logout(f"🤖{username}🎧")
+                logo()
+                selected =  option_menu(
+                    menu_title = f"{name}",
+                    options = ["Introduction","Properties of Sound", "Acoustic Properties", "Equipments & Gears", "DAW"],
+                    menu_icon = "cassette-fill",
+                    icons = ["play-btn", "soundwave", "speaker", "mic", "file-music"]
+                    )
+    
             if selected == "Introduction":
                 st.write("---")
                 lcl, mcl, rcl = st.columns(3)
@@ -159,7 +168,7 @@ if username:
             3. **Digital Audio Signal:** A digital audio signal is represented as a sequence of discrete numerical values. It is commonly used in modern audio devices like CDs, MP3 players, and streaming services. Sound waves are sampled at regular intervals, and each sample is assigned a numerical value, creating a digital representation of the audio. For example, the audio signal from a digital music file or the output from a digital audio workstation (DAW) on a computer.
                         """)
                 st.write("***In addition to this, there are various formats of audio signals available.***")
-                st.write("""
+                st.markdown("""
             1. **Mono (Monaural):**
             Mono, short for monaural, refers to a single-channel audio format where all audio signals are mixed together and played through a single speaker or audio channel. In a mono setup, there is no distinction between left and right channels; the sound is centered, making it appear to come from a single point. Mono audio is commonly used in older audio devices, telephones, and public address systems.
 
@@ -169,12 +178,13 @@ if username:
             3. **Surround Sound:**
             Surround sound is a multi-channel audio format that goes beyond the two channels of stereo to create a more immersive audio experience. It uses multiple speakers positioned around the listener to reproduce audio from different directions, simulating a three-dimensional sound environment. The most common surround sound formats are 5.1 and 7.1, which consist of five or seven main speakers and a subwoofer (the ".1" denotes the subwoofer channel for low-frequency effects).
 
-                - 5.1 Surround Sound: It consists of five main speakers: front left, front center, front right, rear left, rear right, and one subwoofer. This format is commonly used in home theaters and movie theaters.
+                - <u>5.1 Surround Sound</u>: It consists of five main speakers: front left, front center, front right, rear left, rear right, and one subwoofer. This format is commonly used in home theaters and movie theaters.
 
-                - 7.1 Surround Sound: It adds two additional speakers to the 5.1 setup, creating a more immersive sound experience. In addition to the front and rear speakers, there are two side speakers. This format is often used in high-end home theaters and gaming setups.
+                - <u>7.1 Surround Sound</u>: It adds two additional speakers to the 5.1 setup, creating a more immersive sound experience. In addition to the front and rear speakers, there are two side speakers. This format is often used in high-end home theaters and gaming setups.
 
             Surround sound is particularly effective in movies, video games, and other media that benefit from a more spatial and realistic audio presentation. It allows for sounds to move around the listener, enhancing the overall audio experience.
-                        """)
+                        """,
+                        unsafe_allow_html=True)
                 st.subheader('Wave Theory of Sound')
                 st.write("""
                 - **Sound as a Wave:** According to the wave theory of sound, sound is considered a mechanical wave that propagates through a medium, such as air or water.
@@ -891,6 +901,13 @@ if username:
             These are just a few examples, and there are many other DAWs available, each with its own unique features and strengths. Users often choose a DAW based on their specific needs, preferred workflow, and the type of music or audio projects they wish to create.
                         """)
                 st.write("---")
+            # Add footer content
+            st.markdown(
+                '<div style="text-align: center;">'
+                '<p>© 2023 The Soft Drink Studios. All rights reserved.</p>'
+                '</div>',
+                unsafe_allow_html=True
+            )
     else:
         if authentication_status == False:
             lm,cm, rm = st.columns(3)
