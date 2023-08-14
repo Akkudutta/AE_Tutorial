@@ -13,7 +13,7 @@ import math
 import streamlit_authenticator as stauth
 from database import fetch_users
 
-st.set_page_config(page_title="The Soft Drink Studios", page_icon='🎙', layout= 'wide')
+st.set_page_config(page_title="The Soft Drink Studios | Basics of Audio Engineering", page_icon='🎙', layout= 'wide')
 
 #----USE LOCAL CSS-------
 #Style.css file download: https://github.com/Sven-Bo/personal-website-streamlit/blob/master/style/style.css
