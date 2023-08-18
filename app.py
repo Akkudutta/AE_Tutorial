@@ -903,7 +903,7 @@ if username:
             # Add footer content
             st.markdown(
                 '<div style="text-align: center;">'
-                '<p>© 2023 The Soft Drink Studios. All rights reserved.</p>'
+                '<p>© 2023 <a href="https://www.thesoftdrinkstudios.com/">The Soft Drink Studios</a>. All rights reserved.</p>'
                 '</div>',
                 unsafe_allow_html=True
             )
