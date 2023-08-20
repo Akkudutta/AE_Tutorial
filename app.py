@@ -101,7 +101,7 @@ if username:
                 st.title('🎙 BASICS OF AUDIO ENGINEERING 🎙')
             lcl, rcl = st.columns((2,1))
             with rcl:
-                st.markdown('<u>***A course by Aakarshan Dutta***</u>', unsafe_allow_html=True)
+                st.markdown('***A course by [Aakarshan Dutta](https://www.instagram.com/aakarshandutta/?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D)***')
 
             with st.sidebar:
                 h1,h2,h3 = st.columns((1,2,1))
