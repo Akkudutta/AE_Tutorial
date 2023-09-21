@@ -124,7 +124,7 @@ celerybeat.pid
 *.sage.py
 
 user_data.xlsx
-demo.py
+AE.pdf
 
 # Environments
 .env

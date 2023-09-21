@@ -11,7 +11,9 @@ import pandas as pd
 import openpyxl
 import math
 import streamlit_authenticator as stauth
-from database import fetch_users
+import os
+from dotenv import load_dotenv
+from deta import Deta
 
 st.set_page_config(page_title="The Soft Drink Studios | Basics of Audio Engineering", page_icon='🎙', layout= 'wide')
 
@@ -23,7 +25,23 @@ def local_css(file_name):
 
 local_css("Style/Style.css")
 
+#Load Environment Variable
+load_dotenv('.env')
+
+DETA_KEY = os.getenv("DETA_KEY")
+deta = Deta(DETA_KEY)
+
+db = deta.Base('Studentdata')
+
 #---USER AUTHENTICATION---
+def fetch_users():
+    """
+    Fetch Users
+    :return Dictionary of users:
+    """
+    users = db.fetch()
+    return users.items
+
 users = fetch_users()
 emails = [user['key'] for user in users]
 usernames = [user['username'] for user in users]
