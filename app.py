@@ -89,7 +89,7 @@ with st.sidebar:
     h1,h2,h3 = st.columns((1,2,1))
     logo()
     selected =  option_menu(
-        menu_title = "Shuffle",
+        menu_title = "Shuffle Menu",
         options = ["Introduction","Properties of Sound", "Acoustic Properties", "Equipments & Gears", "DAW"],
         menu_icon = "cassette-fill",
         icons = ["play-btn", "soundwave", "speaker", "mic", "file-music"]
